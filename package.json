@@ -1,20 +1,30 @@
 {
-  "devDependencies": {
-    "@playwright/test": "^1.50.1",
-    "@types/node": "^22.13.1",
-    "@types/resemblejs": "^4.1.3"
+  "name": "playwright-seed-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "cloud-runner-windows": "pwsh ./cloud-runner.ps1",
+    "cloud-runner-headed-windows": "pwsh ./cloud-runner-headed.ps1",
+    "cloud-runner-headed-unix": "sh ./cloud-runner-headed.sh",
+    "cloud-runner-unix": "sh ./cloud-runner-headless.sh",
+    "update-jira-status": "node ./tests/utils/jira-xray-integration.ts",
+    "test:dev": "ENV=dev npx playwright test",
+    "test:qa": "ENV=qa npx playwright test",
+    "test:stage": "ENV=stage npx playwright test",
+    "test:prod": "ENV=prod npx playwright test"
   },
-  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.15.33",
+    "typescript": "^5.8.3"
+  },
   "dependencies": {
-    "canvas": "^3.1.0",
-    "chrome-launcher": "^1.1.2",
-    "csv-parser": "^3.2.0",
-    "dotenv": "^16.4.7",
-    "fs": "^0.0.1-security",
-    "lighthouse": "^12.3.0",
-    "playwright": "^1.50.1",
-    "playwright-html-reporter": "^0.1.11",
-    "resemblejs": "^5.0.0",
-    "typo-js": "^1.2.5"
+    "cross-env": "^10.0.0",
+    "dotenv": "^16.6.1",
+    "npm": "^11.6.0"
   }
 }

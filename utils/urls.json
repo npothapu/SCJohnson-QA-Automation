@@ -1,0 +1,20 @@
+{
+  "authentication": {
+    "authUrl": "",
+    "afterLoginUrl": ""
+  },
+  "components": {
+    "baseUrl": "",
+    "rootUrl": ""
+  },
+  "authored": {
+    "baseUrl": "",
+    "rootUrl": "",
+    "somePath": ""
+  },
+  "prod": {
+    "baseUrl": "",
+    "rootUrl": "",
+    "someProdPath": ""
+  }
+}

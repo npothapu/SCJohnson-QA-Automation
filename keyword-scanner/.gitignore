@@ -5,9 +5,3 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-tests/playwright/
-tests/playwright/.auth/
-/playwright-json/
-
-
-.DS_Store

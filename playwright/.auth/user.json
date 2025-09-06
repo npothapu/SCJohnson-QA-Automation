@@ -1,0 +1,117 @@
+{
+  "cookies": [
+    {
+      "name": "user-country-preference",
+      "value": "us",
+      "domain": "stage.blueparadox.com",
+      "path": "/",
+      "expires": 1788654319.570408,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "NEXT_LOCALE",
+      "value": "en-us",
+      "domain": "stage.blueparadox.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "YSC",
+      "value": "48ipPDPYD4s",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "VISITOR_INFO1_LIVE",
+      "value": "ODajynr8zAk",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1772670320.410441,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "VISITOR_PRIVACY_METADATA",
+      "value": "CgJVUxIEGgAgNw%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1772670320.410454,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-ROLLOUT_TOKEN",
+      "value": "CJn-vLu38KbjLRCLmr7q78KPAxiLmr7q78KPAw%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1772670320.410469,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://blueparadox.com",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "_ttp",
+      "value": "32IqEEDslhq1yfrhVJZGCj1Spn6",
+      "domain": ".tiktok.com",
+      "path": "/",
+      "expires": 1790814320.555177,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_tt_enable_cookie",
+      "value": "1",
+      "domain": ".blueparadox.com",
+      "path": "/",
+      "expires": 1790814320,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ttp",
+      "value": "01K4E6KM2VMRGXNB23HRXRX5GR_.tt.1",
+      "domain": ".blueparadox.com",
+      "path": "/",
+      "expires": 1790814320,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ttcsid_D05A55RC77U6FNPJEFGG",
+      "value": "1757118320733::qM4eRNrtIoaHqMSQAauT.1.1757118320733",
+      "domain": ".blueparadox.com",
+      "path": "/",
+      "expires": 1790814320,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ttcsid",
+      "value": "1757118320733::-uboWbeJMwLUlKzSbDJL.1.1757118320733",
+      "domain": ".blueparadox.com",
+      "path": "/",
+      "expires": 1790814320,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

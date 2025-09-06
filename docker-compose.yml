@@ -1,0 +1,94 @@
+services:
+  pw_headed:
+    image: mcr.microsoft.com/playwright:v1.51.1-noble
+    profiles:
+      - headed
+    shm_size: "8g"
+    tty: true
+    init: true
+    deploy:
+      resources:
+        limits:
+          cpus: "8"
+          memory: "32gb"
+    volumes:
+      - .:/app
+      - ./blob-report:/app/blob-report
+    working_dir: /app
+    environment:
+      - DOCKER=1
+      - PLAYWRIGHT_BLOB_REPORT_NAME=report-headed
+      - HEADLESS=false
+    command: xvfb-run --auto-servernum --server-args='-screen 0 1280x720x24' npx playwright test --reporter=blob
+  pw_shard_1:
+    image: mcr.microsoft.com/playwright:v1.51.1-noble
+    profiles:
+      - headless
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "6gb"
+    volumes:
+      - .:/app
+      - ./blob-report:/app/blob-report
+    working_dir: /app
+    environment:
+      - DOCKER=1
+      - PLAYWRIGHT_BLOB_REPORT_NAME=report-1
+    command: npx playwright test --shard=1/4 --reporter=blob
+  pw_shard_2:
+    image: mcr.microsoft.com/playwright:v1.51.1-noble
+    profiles:
+      - headless
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "6gb"
+    volumes:
+      - .:/app
+      - ./blob-report:/app/blob-report
+    working_dir: /app
+    environment:
+      - DOCKER=1
+      - PLAYWRIGHT_BLOB_REPORT_NAME=report-2
+    command: npx playwright test --shard=2/4 --reporter=blob
+  pw_shard_3:
+    image: mcr.microsoft.com/playwright:v1.51.1-noble
+    profiles:
+      - headless
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "6gb"
+    volumes:
+      - .:/app
+      - ./blob-report:/app/blob-report
+    working_dir: /app
+    environment:
+      - DOCKER=1
+      - PLAYWRIGHT_BLOB_REPORT_NAME=report-3
+    command: npx playwright test --shard=3/4 --reporter=blob
+  pw_shard_4:
+    image: mcr.microsoft.com/playwright:v1.51.1-noble
+    profiles:
+      - headless
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "6gb"
+    volumes:
+      - .:/app
+      - ./blob-report:/app/blob-report
+    working_dir: /app
+    environment:
+      - DOCKER=1
+      - PLAYWRIGHT_BLOB_REPORT_NAME=report-4
+    command: npx playwright test --shard=4/4 --reporter=blob

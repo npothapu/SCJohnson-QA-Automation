@@ -1,90 +1,75 @@
-import { defineConfig, devices } from '@playwright/test';
-import * as dotenv from 'dotenv';
+import { defineConfig, devices } from "@playwright/test";
+import path from "path";
+import dotenv from "dotenv";
+dotenv.config({ path: "./utils/env/.env" });
 
-dotenv.config({ path: `./config/.env.${process.env.ENV || 'dev'}` });
+let baseUrl: string = process.env.BASE_URL || '';
+let environment = process.env.ENV?.toLowerCase() || 'default';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+if (!baseUrl) {
+  switch (environment) {
+    case 'stg':
+      baseUrl = process.env.STG_BASE_URL || '';
+      break;
+    case 'prod':
+      baseUrl = process.env.PROD_BASE_URL || '';
+      break;
+    default:
+      baseUrl = process.env.BASE_URL || '';
+      environment = 'default';
+  }
 
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
+  if (!baseUrl) {
+    throw new Error(`No URL configured for environment '${environment}'. 
+    Please check your .env file or provide a DEBUG_URL.`);
+  }
+}
+
+process.env.NODE_ENV = environment;
+
 export default defineConfig({
-  testDir: './tests',
-  /* Run tests in files in parallel */
+  testDir: "./tests",
+  snapshotPathTemplate: path.join(
+    __dirname,
+    "utils",
+    "visual",
+    `${process.env.NODE_ENV}`,
+    "{arg}{ext}"
+  ),
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 1 : 0, // Use 1 retries in CI, 0 locally
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 4 : 10,  // Use 4 workers in CI, 10 locally
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  timeout: 30 * 1000, // 30-second timeout per test
-  reporter: [
-        // ['list'], // Default console output
-        // ['junit', { outputFile: 'results/test-results.xml' }], // JUnit XML report (for CI)
-        ['html', { outputFolder: 'playwright-report' }] // HTML Report
-      ],
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+  reporter: process.env.DOCKER ? "blob" : "html",
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
-    headless: true, // Run browsers in headless mode
-    baseURL: process.env.BASE_URL,
-    screenshot: 'on', // Capture screenshots only on failure
-      /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'retain-on-failure' // Keep trace files only on failures
-  
+    baseURL: baseUrl,
+    trace: "on-first-retry",
   },
-
-  /* Configure projects for major browsers */
   projects: [
+    { name: "setup", testMatch: /.*\.setup\.ts/ },
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'], }
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "playwright/.auth/user.json",
+      },
+      dependencies: ["setup"],
     },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    {
+      name: "firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+        storageState: "playwright/.auth/user.json",
+      },
+      dependencies: ["setup"],
+    },
+    {
+      name: "webkit",
+      use: {
+        ...devices["Desktop Safari"],
+        storageState: "playwright/.auth/user.json",
+      },
+      dependencies: ["setup"],
+    },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });
