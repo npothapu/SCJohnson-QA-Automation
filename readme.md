@@ -155,4 +155,7 @@ npx playwright test
   npx playwright codegen
     Auto generate tests with Codegen.
 
+  npx playwright test --grep "@petitionform" --grep-invert "@mobile"
+    Runs only for desktop
+
 But there's [more](https://playwright.dev/docs/test-cli)!

@@ -1,13 +1,11 @@
 
-# Playwright
 node_modules/
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 tests/playwright/
-tests/playwright/.auth/
+/playwright/.auth/
 /playwright-json/
-
-
+/utils/env/
 .DS_Store

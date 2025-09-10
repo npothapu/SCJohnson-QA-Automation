@@ -5,7 +5,7 @@
       "value": "us",
       "domain": "stage.blueparadox.com",
       "path": "/",
-      "expires": 1788654319.570408,
+      "expires": 1789013498.847964,
       "httpOnly": true,
       "secure": true,
       "sameSite": "Lax"
@@ -22,7 +22,7 @@
     },
     {
       "name": "YSC",
-      "value": "48ipPDPYD4s",
+      "value": "c72HsU03sXg",
       "domain": ".youtube.com",
       "path": "/",
       "expires": -1,
@@ -31,31 +31,11 @@
       "sameSite": "None"
     },
     {
-      "name": "VISITOR_INFO1_LIVE",
-      "value": "ODajynr8zAk",
-      "domain": ".youtube.com",
-      "path": "/",
-      "expires": 1772670320.410441,
-      "httpOnly": true,
-      "secure": true,
-      "sameSite": "None"
-    },
-    {
-      "name": "VISITOR_PRIVACY_METADATA",
-      "value": "CgJVUxIEGgAgNw%3D%3D",
-      "domain": ".youtube.com",
-      "path": "/",
-      "expires": 1772670320.410454,
-      "httpOnly": true,
-      "secure": true,
-      "sameSite": "None"
-    },
-    {
       "name": "__Secure-ROLLOUT_TOKEN",
-      "value": "CJn-vLu38KbjLRCLmr7q78KPAxiLmr7q78KPAw%3D%3D",
+      "value": "COiF49nXy7vuahCYotLwqc2PAxiYotLwqc2PAw%3D%3D",
       "domain": ".youtube.com",
       "path": "/",
-      "expires": 1772670320.410469,
+      "expires": 1773029499.80598,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None",
@@ -63,11 +43,31 @@
       "_crHasCrossSiteAncestor": true
     },
     {
+      "name": "VISITOR_INFO1_LIVE",
+      "value": "U1tROpk9hDA",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1773029499.806061,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "VISITOR_PRIVACY_METADATA",
+      "value": "CgJVUxIEGgAgbA%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1773029499.806082,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
       "name": "_ttp",
-      "value": "32IqEEDslhq1yfrhVJZGCj1Spn6",
+      "value": "32UaFHGTmYPolwuajEXAosXfRlx",
       "domain": ".tiktok.com",
       "path": "/",
-      "expires": 1790814320.555177,
+      "expires": 1791173499.836055,
       "httpOnly": false,
       "secure": true,
       "sameSite": "None"
@@ -77,37 +77,37 @@
       "value": "1",
       "domain": ".blueparadox.com",
       "path": "/",
-      "expires": 1790814320,
+      "expires": 1791173500,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "_ttp",
-      "value": "01K4E6KM2VMRGXNB23HRXRX5GR_.tt.1",
+      "value": "01K4RX4X5GSJQEKVQZ0WPV9N46_.tt.1",
       "domain": ".blueparadox.com",
       "path": "/",
-      "expires": 1790814320,
+      "expires": 1791173500,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "ttcsid_D05A55RC77U6FNPJEFGG",
-      "value": "1757118320733::qM4eRNrtIoaHqMSQAauT.1.1757118320733",
+      "value": "1757477500082::yBp18be4MLyLZmeO3SCX.1.1757477500082",
       "domain": ".blueparadox.com",
       "path": "/",
-      "expires": 1790814320,
+      "expires": 1791173500,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "ttcsid",
-      "value": "1757118320733::-uboWbeJMwLUlKzSbDJL.1.1757118320733",
+      "value": "1757477500082::RECfvVYAhM2bc-6FgX8S.1.1757477500082",
       "domain": ".blueparadox.com",
       "path": "/",
-      "expires": 1790814320,
+      "expires": 1791173500,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"

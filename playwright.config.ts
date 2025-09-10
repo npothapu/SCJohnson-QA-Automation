@@ -3,29 +3,31 @@ import path from "path";
 import dotenv from "dotenv";
 dotenv.config({ path: "./utils/env/.env" });
 
-let baseUrl: string = process.env.BASE_URL || '';
-let environment = process.env.ENV?.toLowerCase() || 'default';
+const environment = process.env.ENV?.toUpperCase() || 'STG';
 
-if (!baseUrl) {
-  switch (environment) {
-    case 'stg':
-      baseUrl = process.env.STG_BASE_URL || '';
-      break;
-    case 'prod':
-      baseUrl = process.env.PROD_BASE_URL || '';
-      break;
-    default:
-      baseUrl = process.env.BASE_URL || '';
-      environment = 'default';
-  }
+let baseUrl: string = '';
+let userid: string = '';
+let pwd: string = '';
+let httpCredentials: { username: string; password: string } | undefined = undefined;
 
-  if (!baseUrl) {
-    throw new Error(`No URL configured for environment '${environment}'. 
-    Please check your .env file or provide a DEBUG_URL.`);
-  }
+switch (environment) {
+  case 'STG':
+    baseUrl = process.env.STG_BASE_URL ?? '';
+    userid = process.env.STG_UID ?? '';
+    pwd = process.env.STG_PWD ?? '';
+    httpCredentials = { username: userid, password: pwd };
+    break;
+  case 'PROD':
+    baseUrl = process.env.PROD_BASE_URL ?? '';
+    httpCredentials = undefined; // No basic auth for PROD
+    break;
+  default:
+    throw new Error(`Unknown environment: ${environment}`);
 }
 
-process.env.NODE_ENV = environment;
+if (!baseUrl) {
+  throw new Error(`No URL configured for environment '${environment}'. Please check the .env file.`);
+}
 
 export default defineConfig({
   testDir: "./tests",
@@ -39,10 +41,12 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : 8,
   reporter: process.env.DOCKER ? "blob" : "html",
   use: {
     baseURL: baseUrl,
+    ...(httpCredentials && { httpCredentials }),
+    screenshot: 'only-on-failure',
     trace: "on-first-retry",
   },
   projects: [
@@ -67,6 +71,25 @@ export default defineConfig({
       name: "webkit",
       use: {
         ...devices["Desktop Safari"],
+        storageState: "playwright/.auth/user.json",
+      },
+      dependencies: ["setup"],
+    },
+    {
+      name: 'iPhone-12',
+      use: {
+        ...devices['iPhone 12'],
+        browserName: 'webkit',
+        storageState: "playwright/.auth/user.json",
+      },
+      dependencies: ["setup"],
+    },
+    {
+      name: 'Galaxy S24',
+      use: {
+        ...devices['Galaxy S24'],
+        browserName: 'chromium',
+        hasTouch: true,
         storageState: "playwright/.auth/user.json",
       },
       dependencies: ["setup"],
