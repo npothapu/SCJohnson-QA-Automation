@@ -58,6 +58,7 @@ export default defineConfig({
         storageState: "playwright/.auth/user.json",
       },
       dependencies: ["setup"],
+      testMatch: /.*(?<!mobile)\.spec\.ts$/,
     },
     {
       name: "firefox",
@@ -66,6 +67,7 @@ export default defineConfig({
         storageState: "playwright/.auth/user.json",
       },
       dependencies: ["setup"],
+      testMatch: /.*(?<!mobile)\.spec\.ts$/,
     },
     {
       name: "webkit",
@@ -74,6 +76,7 @@ export default defineConfig({
         storageState: "playwright/.auth/user.json",
       },
       dependencies: ["setup"],
+      testMatch: /.*(?<!mobile)\.spec\.ts$/,
     },
     {
       name: 'iPhone-12',
@@ -83,16 +86,18 @@ export default defineConfig({
         storageState: "playwright/.auth/user.json",
       },
       dependencies: ["setup"],
+      testMatch: /.*mobile\.spec\.ts$/,
     },
     {
-      name: 'Galaxy S24',
+      name: 'Galaxy S20',
       use: {
-        ...devices['Galaxy S24'],
+        ...devices['Galaxy S20'],
         browserName: 'chromium',
         hasTouch: true,
         storageState: "playwright/.auth/user.json",
       },
       dependencies: ["setup"],
+      testMatch: /.*mobile\.spec\.ts$/,
     },
   ],
 });

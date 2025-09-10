@@ -12,7 +12,7 @@ async function expectFieldError(page: Page, fieldLabel: string, errorText: strin
 for (const tc of testCases) {
   test(`@petitionform-mobile @mobile ${tc.title}`, async ({ page }) => {
     await page.goto('/');
-    // Open mobile nav menu before accessing petition
+    
     const navMenuButton = page.getByRole('button', { name: /menu|navigation/i });
     if (await navMenuButton.isVisible().catch(() => false)) {
       await navMenuButton.click();
