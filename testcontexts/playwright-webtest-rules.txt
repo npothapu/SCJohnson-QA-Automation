@@ -11,7 +11,7 @@ Rules
 - Execute the emitted test and iterate refinements until it passes (max 10 attempts).
 
 Playwright Standards (Non-negotiables)
-- One user flow per spec; keep helpers short; avoid over-abstraction.
+- One user flow per test; specs may contain multiple independent tests; keep helpers short; avoid over-abstraction.
 - Prefer getByRole / getByTestId; avoid fragile CSS/XPath (e.g., nth-child).
 - No arbitrary waits/timeouts: do not use waitForTimeout, sleeps, or bump default timeouts. Sync on events/roles/URLs/network.
 - Use fixtures for setup/login if needed; secrets/URLs come from .env; never hardcode credentials.
@@ -42,7 +42,7 @@ Workflow
 5) Save & Run: Write to tests/, execute it, and refine up to 10 attempts until green.
 
 Acceptance Checklist (before final emit)
-- [ ] One flow per spec; minimal helpers; no over-abstraction.
+- [ ] One user flow per test; spec may contain multiple independent tests; minimal helpers; no over-abstraction.
 - [ ] Roles/TestIds only; no fragile CSS/XPath.
 - [ ] No arbitrary waits/timeouts; event/URL/role-based sync only.
 - [ ] No console.log; no comments or dead code.
