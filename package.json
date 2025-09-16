@@ -12,7 +12,11 @@
     "test:qa": "cross-env ENV=qa npx playwright test",
     "test:stage": "cross-env ENV=stage npx playwright test",
     "test:prod": "cross-env ENV=prod npx playwright test",
-    "test:stg": "cross-env ENV=stg npx playwright test"
+    "test:stg": "cross-env ENV=stg npx playwright test",
+    "test:mobile": "cross-env ENV=stg npx playwright test --grep @mobile",
+    "test:mobile-header": "cross-env ENV=stg npx playwright test --grep '@mobile.*@header'",
+    "test:mobile-footer": "cross-env ENV=stg npx playwright test --grep '@mobile.*@footer'",
+    "test:webtest": "cross-env ENV=stg npx playwright test --grep @webtest"
   },
   "keywords": [],
   "author": "",

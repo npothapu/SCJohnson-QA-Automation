@@ -81,6 +81,30 @@ npx playwright test --project=chromium
 npx playwright test --grep "@petitionform" --grep-invert "@mobile"
 ```
 
+### Mobile & Tag-Based Shortcuts
+New npm scripts provide quick filters for commonly used tag groups (executed against STG environment by default):
+
+```cmd
+npm run test:mobile         # all @mobile tagged tests
+npm run test:mobile-header  # @mobile AND @header
+npm run test:mobile-footer  # @mobile AND @footer
+npm run test:webtest        # all @webtest flows (single-flow compliance specs)
+```
+
+Tag logic uses Playwright's `--grep` regex matching. For combined matching like `@mobile.*@header`, order of tags in the test title matters (this repo places all tags in the test title near the start). If you introduce new tags, keep them grouped to preserve these regex filters.
+
+Example creating a new single-flow mobile spec:
+
+```ts
+test('performs X user action', { tag: ['@webtest', '@mobile', '@feature-x'] }, async ({ page }) => { /* flow */ });
+```
+
+To run only new feature tag:
+
+```cmd
+npx playwright test --grep "@feature-x"
+```
+
 ## Auth setup
 - A dedicated "setup" project runs `tests/auth.setup.ts` and creates `playwright/.auth/user.json`.
 - Other projects depend on setup and reuse `storageState` in STG only.

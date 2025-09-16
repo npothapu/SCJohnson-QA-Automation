@@ -1,6 +1,13 @@
 import { test, expect } from '@playwright/test';
 import { siteLinks } from '../../utils/data/siteLinks';
 
+const flows = siteLinks.map(l => ({
+  name: l.name,
+  expectedUrl: l.expectedUrl,
+  expectedTitle: l.expectedTitle,
+  tag: ["@desktop", "@footer", "@regression", `@${l.name.replace(/\s+/g, '-').toLowerCase()}`]
+}));
+
 test.beforeEach(async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   const acceptCookies = page.getByRole('button', { name: 'Accept Cookies' });
@@ -9,19 +16,19 @@ test.beforeEach(async ({ page }) => {
   }
 });
 
-test.describe.configure({ mode: 'serial' });
-
-for (const link of siteLinks) {
-  test(`@footer-navigation @smoke should navigate to ${link.expectedTitle} from footer link ${link.name}`, async ({ page }) => {
-    await page.waitForLoadState('domcontentloaded');
-    const footer = page.locator('footer');
-    await footer.waitFor();
-    const target = footer.getByRole('link', { name: link.name, exact: true });
-    await target.scrollIntoViewIfNeeded();
-    await target.waitFor({ state: 'visible' });
-    await target.click();
-    await page.waitForLoadState('domcontentloaded');
-    await expect(page).toHaveURL(new RegExp(`${link.expectedUrl.replace(/\//g, '\\/')}(?:/)?$`));
-    await expect(page).toHaveTitle(link.expectedTitle);
-  });
-}
+test.describe('desktop footer navigation', () => {
+  for (const flow of flows) {
+    test(`navigates to ${flow.name} via footer`, { tag: flow.tag }, async ({ page }) => {
+      const footer = page.locator('footer');
+      await footer.waitFor();
+      const target = footer.getByRole('link', { name: flow.name, exact: true });
+      await target.scrollIntoViewIfNeeded();
+      await Promise.all([
+        page.waitForLoadState('domcontentloaded'),
+        target.click(),
+      ]);
+      await expect(page).toHaveURL(new RegExp(`${flow.expectedUrl.replace(/\//g, '\\/')}(?:/)?$`));
+      await expect(page).toHaveTitle(flow.expectedTitle);
+    });
+  }
+});
