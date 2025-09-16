@@ -1,11 +1,18 @@
 import { test as setup } from "@playwright/test";
 import path from "path";
-require('dotenv').config();
+import dotenv from "dotenv";
+// Keep .env loading consistent with playwright.config.ts
+dotenv.config({ path: "./utils/env/.env" });
 
 const authFile = path.join(__dirname, "../playwright/.auth/user.json");
-const ENV = process.env.ENV || "PROD";
+// Normalize ENV to uppercase and default to STG to match playwright.config.ts
+const ENV = (process.env.ENV || "STG").toUpperCase();
 
 setup("authenticate", async ({ page }) => {
+  if (ENV !== "STG") {
+    // Skip auth setup on non-STG environments; avoids console logging and uses reporter-visible skip instead
+    setup.skip(true, `Skipping authentication setup for ENV=${ENV}`);
+  }
   if (ENV === "STG") {
     const baseUrl = process.env.STG_BASE_URL;
     if (!baseUrl) {
@@ -18,7 +25,5 @@ setup("authenticate", async ({ page }) => {
       await acceptCookies.click();
     }
     await page.context().storageState({ path: authFile });
-  } else {
-    console.log("Production environment detected, skipping authentication setup.");
   }
 });

@@ -9,3 +9,5 @@ tests/playwright/
 /playwright-json/
 /utils/env/
 .DS_Store
+/testcontexts/
+/env/

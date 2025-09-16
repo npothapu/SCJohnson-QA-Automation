@@ -8,10 +8,11 @@
     "cloud-runner-headed-unix": "sh ./cloud-runner-headed.sh",
     "cloud-runner-unix": "sh ./cloud-runner-headless.sh",
     "update-jira-status": "node ./tests/utils/jira-xray-integration.ts",
-    "test:dev": "ENV=dev npx playwright test",
-    "test:qa": "ENV=qa npx playwright test",
-    "test:stage": "ENV=stage npx playwright test",
-    "test:prod": "ENV=prod npx playwright test"
+    "test:dev": "cross-env ENV=dev npx playwright test",
+    "test:qa": "cross-env ENV=qa npx playwright test",
+    "test:stage": "cross-env ENV=stage npx playwright test",
+    "test:prod": "cross-env ENV=prod npx playwright test",
+    "test:stg": "cross-env ENV=stg npx playwright test"
   },
   "keywords": [],
   "author": "",

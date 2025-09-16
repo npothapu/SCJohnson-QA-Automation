@@ -5,7 +5,7 @@
       "value": "us",
       "domain": "stage.blueparadox.com",
       "path": "/",
-      "expires": 1789076774.377568,
+      "expires": 1789582043.420991,
       "httpOnly": true,
       "secure": true,
       "sameSite": "Lax"
@@ -21,21 +21,33 @@
       "sameSite": "Lax"
     },
     {
+      "name": "_ttp",
+      "value": "32nAcovSjfv7xiMq71X3NBRdCiY",
+      "domain": ".tiktok.com",
+      "path": "/",
+      "expires": 1791742044.477882,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
       "name": "YSC",
-      "value": "b2Sw5be5SLM",
+      "value": "_smtNTW_gqQ",
       "domain": ".youtube.com",
       "path": "/",
       "expires": -1,
       "httpOnly": true,
       "secure": true,
-      "sameSite": "None"
+      "sameSite": "None",
+      "partitionKey": "https://blueparadox.com",
+      "_crHasCrossSiteAncestor": true
     },
     {
       "name": "__Secure-ROLLOUT_TOKEN",
-      "value": "CJud173n_YTraBDF8dTMlc-PAxjF8dTMlc-PAw%3D%3D",
+      "value": "CNeYyqi6rvCBLxD17-Xv792PAxj17-Xv792PAw%3D%3D",
       "domain": ".youtube.com",
       "path": "/",
-      "expires": 1773092775.279445,
+      "expires": 1773598044.494805,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None",
@@ -44,74 +56,94 @@
     },
     {
       "name": "VISITOR_INFO1_LIVE",
-      "value": "yrcCx71tgto",
+      "value": "_fEd0u8DU3k",
       "domain": ".youtube.com",
       "path": "/",
-      "expires": 1773092775.279504,
+      "expires": 1773598044.494866,
       "httpOnly": true,
       "secure": true,
-      "sameSite": "None"
+      "sameSite": "None",
+      "partitionKey": "https://blueparadox.com",
+      "_crHasCrossSiteAncestor": true
     },
     {
       "name": "VISITOR_PRIVACY_METADATA",
-      "value": "CgJVUxIEGgAgHA%3D%3D",
+      "value": "CgJVUxIEGgAgLQ%3D%3D",
       "domain": ".youtube.com",
       "path": "/",
-      "expires": 1773092775.279518,
+      "expires": 1773598044.49489,
       "httpOnly": true,
       "secure": true,
-      "sameSite": "None"
-    },
-    {
-      "name": "_ttp",
-      "value": "32WeV6JuFCVLjdLnTgwO5BKMBSY",
-      "domain": ".tiktok.com",
-      "path": "/",
-      "expires": 1791236775.280986,
-      "httpOnly": false,
-      "secure": true,
-      "sameSite": "None"
+      "sameSite": "None",
+      "partitionKey": "https://blueparadox.com",
+      "_crHasCrossSiteAncestor": true
     },
     {
       "name": "_tt_enable_cookie",
       "value": "1",
       "domain": ".blueparadox.com",
       "path": "/",
-      "expires": 1791236775,
+      "expires": 1791742044,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "_ttp",
-      "value": "01K4TSFXEYBRDEV5JZT88BG8D4_.tt.1",
+      "value": "01K59VBGD9JZ1HGTG3Z95WS6K0_.tt.1",
       "domain": ".blueparadox.com",
       "path": "/",
-      "expires": 1791236775,
+      "expires": 1791742044,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "ttcsid_D05A55RC77U6FNPJEFGG",
-      "value": "1757540775392::YXUwXZSsAmK3eSgFirRP.1.1757540775392",
+      "value": "1758046044588::MyR6vA-gvp33Mm2Isi06.1.1758046044588.0",
       "domain": ".blueparadox.com",
       "path": "/",
-      "expires": 1791236775,
+      "expires": 1791742044,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "ttcsid",
-      "value": "1757540775392::NdmKE49Pe6P_fQUE2FHz.1.1757540775392",
+      "value": "1758046044588::A1Nf2BLqrgkFdoM3k18o.1.1758046044588.0",
       "domain": ".blueparadox.com",
       "path": "/",
-      "expires": 1791236775,
+      "expires": 1791742044,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
+    },
+    {
+      "name": "vercel-experiment-uuid",
+      "value": "fi-HOnPghplaLxp9dRbro",
+      "domain": "vercel.live",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://blueparadox.com",
+      "_crHasCrossSiteAncestor": true
     }
   ],
-  "origins": []
+  "origins": [
+    {
+      "origin": "https://vercel.live",
+      "localStorage": [
+        {
+          "name": "vercel-toolbar-experiment-uuid-https://stage.blueparadox.com",
+          "value": "\"fi-HOnPghplaLxp9dRbro\""
+        },
+        {
+          "name": "vid-https://stage.blueparadox.com",
+          "value": "\"17580460443720.9723077469747352\""
+        }
+      ]
+    }
+  ]
 }

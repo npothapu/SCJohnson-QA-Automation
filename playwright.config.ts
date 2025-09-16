@@ -3,7 +3,8 @@ import path from "path";
 import dotenv from "dotenv";
 dotenv.config({ path: "./utils/env/.env" });
 
-const environment = process.env.ENV?.toUpperCase() || 'STG';
+const rawEnv = process.env.ENV?.toUpperCase() || 'STG';
+const environment = rawEnv === 'STAGE' ? 'STG' : rawEnv;
 
 let baseUrl: string = '';
 let userid: string = '';
@@ -29,6 +30,8 @@ if (!baseUrl) {
   throw new Error(`No URL configured for environment '${environment}'. Please check the .env file.`);
 }
 
+const AUTH_STATE = "playwright/.auth/user.json";
+
 export default defineConfig({
   testDir: "./tests",
   snapshotPathTemplate: path.join(
@@ -43,19 +46,21 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : 8,
   reporter: process.env.DOCKER ? "blob" : "html",
+
   use: {
     baseURL: baseUrl,
     ...(httpCredentials && { httpCredentials }),
     screenshot: 'only-on-failure',
     trace: "on-first-retry",
-  },
+    },
+  
   projects: [
     { name: "setup", testMatch: /.*\.setup\.ts/ },
     {
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        storageState: "playwright/.auth/user.json",
+        ...(environment === "STG" ? { storageState: AUTH_STATE } : {}),
       },
       dependencies: ["setup"],
       testMatch: /.*(?<!mobile)\.spec\.ts$/,
@@ -64,7 +69,7 @@ export default defineConfig({
       name: "firefox",
       use: {
         ...devices["Desktop Firefox"],
-        storageState: "playwright/.auth/user.json",
+        ...(environment === "STG" ? { storageState: AUTH_STATE } : {}),
       },
       dependencies: ["setup"],
       testMatch: /.*(?<!mobile)\.spec\.ts$/,
@@ -73,7 +78,7 @@ export default defineConfig({
       name: "webkit",
       use: {
         ...devices["Desktop Safari"],
-        storageState: "playwright/.auth/user.json",
+        ...(environment === "STG" ? { storageState: AUTH_STATE } : {}),
       },
       dependencies: ["setup"],
       testMatch: /.*(?<!mobile)\.spec\.ts$/,
@@ -83,7 +88,7 @@ export default defineConfig({
       use: {
         ...devices['iPhone 12'],
         browserName: 'webkit',
-        storageState: "playwright/.auth/user.json",
+        ...(environment === "STG" ? { storageState: AUTH_STATE } : {}),
       },
       dependencies: ["setup"],
       testMatch: /.*mobile\.spec\.ts$/,
@@ -94,7 +99,7 @@ export default defineConfig({
         ...devices['Galaxy S20'],
         browserName: 'chromium',
         hasTouch: true,
-        storageState: "playwright/.auth/user.json",
+        ...(environment === "STG" ? { storageState: AUTH_STATE } : {}),
       },
       dependencies: ["setup"],
       testMatch: /.*mobile\.spec\.ts$/,
