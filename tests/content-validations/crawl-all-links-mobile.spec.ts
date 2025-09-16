@@ -4,7 +4,7 @@ import { siteLinks } from '../../utils/data/siteLinks';
 const pages = siteLinks.map(l => ({
   name: l.name,
   expectedUrl: l.expectedUrl,
-  tag: ['@webtest', '@regression', '@desktop', '@content-crawl', `@${l.name.replace(/\s+/g,'-').toLowerCase()}`]
+  tag: ['@webtest', '@regression', '@mobile', '@content-crawl', `@${l.name.replace(/\s+/g,'-').toLowerCase()}`]
 }));
 
 async function dismissCookies(page: Page) {
@@ -14,32 +14,31 @@ async function dismissCookies(page: Page) {
   }
 }
 
-test.describe('desktop content link integrity', () => {
+test.describe('mobile content link integrity', () => {
   for (const p of pages) {
-    test(`crawls internal links on ${p.name} page`, { tag: p.tag }, async ({ page, request }) => {
+    test(`crawls internal links on ${p.name} page (mobile)`, { tag: p.tag }, async ({ page, request, isMobile }) => {
+      if (!isMobile) {
+        test.skip();
+      }
       await page.goto(p.expectedUrl, { waitUntil: 'domcontentloaded' });
       await dismissCookies(page);
-
       const linkElements = await page.$$('a');
       const rawHrefs = await Promise.all(linkElements.map(el => el.getAttribute('href')));
       const pageOrigin = new URL(page.url()).origin;
-
       const hrefs: string[] = Array.from(new Set(
         rawHrefs.filter((h): h is string => {
           if (!h) return false;
           if (h.startsWith('mailto:') || h.startsWith('tel:') || h.startsWith('javascript:')) return false;
-            if (h === '#' || h.startsWith('#')) return false;
+          if (h === '#' || h.startsWith('#')) return false;
           if (/^https?:\/\//i.test(h)) {
             try { return new URL(h).origin === pageOrigin; } catch { return false; }
           }
           return true;
         })
       ));
-
       const failures: { href: string; status: number | string }[] = [];
-
       for (const href of hrefs) {
-        let absolute = href.startsWith('/') ? new URL(href, page.url()).toString() : new URL(href, page.url()).toString();
+        const absolute = href.startsWith('/') ? new URL(href, page.url()).toString() : new URL(href, page.url()).toString();
         try {
           const response = await request.get(absolute);
           const status = response.status();
@@ -53,7 +52,6 @@ test.describe('desktop content link integrity', () => {
           }
         }
       }
-
       expect(failures, `Broken links: ${JSON.stringify(failures, null, 2)}`).toEqual([]);
     });
   }
