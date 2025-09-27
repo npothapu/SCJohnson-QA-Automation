@@ -15,3 +15,4 @@ Playwright Best Practices Checklist
  5) Use selectors over regex → Regex only if absolutely necessary.
  6) No unnecessary abstraction → One clear test is better than 5 layered helpers.
  7) Follow Playwright docs → Stick to built-in methods first before inventing new ones.
+ 8) remove comments in the code

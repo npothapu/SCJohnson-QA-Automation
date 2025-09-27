@@ -23,7 +23,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.55.0",
+    "@playwright/test": "^1.55.1",
     "@types/node": "^22.15.33",
     "playwright": "^1.55.0",
     "typescript": "^5.8.3"
